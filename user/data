@@ -1,0 +1,289 @@
+data
+                                    * * *
+
+The notes plug-in comes with self hosting documentation. To jump to these notes
+position your cursor on the highlighted name and press ‘gf’ in normal mode:
+
+ • Note taking syntax
+ • Note taking commands
+
+                                     * * *
+
+ 
+# Data Structures
+
+## Chapter 1:
+
+How Java Works:
+   Java Program → Compiler → Bytecode -> Java virtual machine → Result
+
+   • An *OBJECT* is a repository of data.
+   • *TYPED DATA* always declare before use.
+   • *PRIMITIVE TYPES*: int, char, bool, float, etc.
+   • A *CLASS* is a template for creating objects.
+
+   More on Data Types:
+      • *BOOLEAN*: 1 or 0.
+      • *CHAR*: character like ‘s’.
+      • *BYTE*: 8-bit integer.
+      • *SHORT*: 16-bit integer.
+      • *INT*: 32-bit integer.
+      • *LONG*: 64-bit integer.
+      • *FLOAT*: 32-bit floating-point number.
+      • *DOUBLE*: 32-bit floating-point number.
+      • *REFERENCE VARIABLE*: a variable whose type is a class.
+
+Access Control Modifiers: 
+   • *PRIVATE*: only visible within class.
+   • *NO MODIFIER*: visible within package. (default)
+   • *PROTECTED*: visible to the package and all subclasses.
+   • *PUBLIC*: visible to everything.
+   
+How to Organize a Class:
+   1) Constants
+   2) Instance variables
+   3) Constructors
+   4) Methods
+   
+Methods:
+   • An *ACCESSOR METHOD* returns a value but takes no input.
+   • An *UPDATE METHOD* changes a value but returns nothing (void).
+
+      {{{java Person S;
+      S = new Person("Sam");
+      String name = S.getName(); //accessor method getName() returns string "Sam"
+      }}}
+Strings:
+   • Java strings are *immutable objects*, so they can’t actually be modified, they just get remade.
+
+      {{{java String s1; //declare variable
+      s1 = new String(); //assign s1 to be an empty string object
+      String s1 = new String(); // s2 new empty string
+      s1 = "hello";
+      s2 = s1; //s2 now also points to "hello"
+      }}}
+         > Both s1 and s2 point to the same “hello” string. They aren’t actually separate entities.
+
+      {{{java s2 = new String(s1); //this will actually create a separate copy of the s1 string "hello" for s2.
+      }}}
+   • If you edit a string in java, you are copying the old one, making the change, and then reassigning it to the variable. 
+
+      {{{java s1 = "hello";
+      s1 += '!'; // copies "hello" and adds '!' to it. s1 now = "hello!"
+      }}}
+Arrays:
+   • A numbered list of variables.
+   • An array variable is a *reference variable*.
+   
+      {{{java int[] array = new int[3]; // array = [][][];
+      int len = array.length; // .length method returns length of an array
+      }}}
+   • Arrays are *immutable objects*.
+      
+   Common ways to work with arrays:
+      • *java.util.Arrays* methods for arrays support some of the following:
+      
+      {{{java Arrays.equals(a,b); // same as a == b. Returns a bool.
+      Arrays.copyOf(A,n); //makes a copy of A into n.
+      Arrays.toString(A); //returns a string of the variable in array A.
+      Arrays.sort(A); //sorts A in ascending order.
+      }}}
+Linked Lists:
+   • Because arrays are *immutable*; you can’t add new items to them without copying the entire array.
+   • *Linked Lists* allow you to manipulate the lists in *constant time*.
+
+      {{{java public class Node{
+         int item; // list item (can be any data type).
+         Node next; //recursive definition: points to the next Node!
+      }
+      Node A = new.Node();
+      Node B = new.Node();
+      Node C = new.Node(); //create 3 items for the list
+      A.item = 1;
+      B.item = 2;
+      C.item = 3; //populate the list
+      A.next = B;
+      B.next = C;
+      C.next = null;
+      }}}
+Complexity of Algorithms:
+   • *TIME COMPLEXITY* is abstracted to the number of steps or basic operations performed in the worst case during a computation.
+   • A *DATA STRUCTURE* is a systematic way of organizing and accessing data.
+   • An *ALGORITHM* is a step-by-step procedure for performing some task in a finite amount of time.
+   • A *PRIMITIVE OPERATION* is a constant time, like calling a method, etc.
+   • To capture the order of growth for an algorithm’s running time, we use a function of the number of primitive operations.
+
+      *f(n)* = # of primitive operations that are performed as a function of input size *n*. 
+      
+   Constant Function:
+      _f(n) = c_
+
+      • For some fixed constant *c*
+         ▸ It Doesn’t matter what *n* is. The algorithm takes a constant amount of time to complete regardless.
+
+   Logarithm Function:
+      _f(n) = log b (n)_
+
+         >if and only if
+         b^x = n
+
+         >What the fuck does log even do?
+         > *Log b (n)*
+         > Takes *n* and divides it by *b* until getting a number <= 1.
+
+      • O(log n) algorithms are great because they reduce the data being used by about half after each iteration.
+      • Since computers are binary, most of the time it will be log base b = 2 {log 2 (n) == log(n)}
+      • Using rule 4 below: log2 (n) = log(n) / log(2) 
+         > This is how to convert from log10 to log2 on a calculator.
+
+      Logarithm Computation:
+         1. logb(ac) = logb a+logb c
+         2. logb(a/c) = logb a−logb c
+         3. logb(ac) = clogb a
+         4. logb a = logd a/logd b
+         5. blogd a = alogd b
+
+   Linear Function:
+      _f(n) = n_
+
+      • Time increases linearly as size *n* increases
+         ▸ For example: searching an array.
+
+   N-Log-N Function:
+      _f(n) = n log n_
+      
+      • The fastest sorting algorithms for sorting *N* items are all in *N-Log-N* time.
+      • This can be interpreted mathematically as: 
+         Comparisons = log n!
+         Comparisons = log(n) + log(n-1) + log(n-2) ... + log(1)
+         Comparisons = nlog(n)
+
+   Quadratic Function:
+      _f(n) = n^2_
+
+      • You will see algos in quadratic time in cases such as *nested loops*.
+         ▸ This is because the first loop does *n* computations, and inner loop also does *n* computations.
+      • O(n^2) algorithms are typically avoided if possible because they become really inefficient the higher *n* gets.
+
+   Polynomial Function:
+      _f(n) = a0 + a1(n) + a2(n^2) + a3(n^3) ... + ad(n^d)_
+
+         > {a0,a1,...ad} are constants called the *coefficients* of the polynomial.
+         > for ad, integer *d* is the *degree* of the polynomial.
+
+         How to find the Polynomial of a method:
+            • The cost of each action within a function is each *comparison* or *assignment* that occurs.
+            • Essentially, you look for + - =. Any of that kind of shit is a computation.
+
+               {{{java listSum(A,n){
+                  int  total = 0;                    // cost: 1 unit (c1)    # of times: 1
+                  for (int i = 0; i < n; i++){       //       2 (c2)                     n+1    <- that +1 is for the exit case of the loop. It has to run one extra time to fail.
+                     total = total + A[i];           //       2 (c3)                     n
+                  }
+                  return total;                      //       1 (c4)                     1
+               }                                     // Add all these terms together:     1 + 2(n+1) + 2(n) + 1   ->  = 4n + 4
+            }}}
+                  → From *4n + 4* 
+                  T(n) = cn + c’  (c is a constant)
+                  → Where:
+                  c = c2 + c3
+                  c’ = c1 + c2 + c4
+
+   Exponential Function:
+      _f(n) = b^n_
+
+      • most common base(*b*) in computing is 2.
+ 
+Asymptotic Analysis:
+   • Normally we are just interested in getting the big picture of the growth rate of a running time for size *n*.
+   • It is often enough just to know that the algorithm grows proportionally to *n*.
+   • We can estimate the number of primitive operations executed up to a constant factor.
+   • For example; T(n) = 17n^2 + 6n + 7
+      ◦ As n → infinity
+      ◦ 6n + 7 become irrelevant as n gets bigger and bigger so we just ignore those terms.
+
+   Big O Notation:
+      • _WORST CASE TIME_
+      Consider f(n) and g(n):
+         f(n) is O(g(n)) *if* 
+            1) there is a real constant *c > 0*.
+            2) there is an integer constant *n >= n0*.
+
+            “f(n) is big-O of g(n).”
+
+            For example;
+               f(n) = 8n + 5 is O(n).
+                  > we need to find a *c* > 0 and *n* >= 1
+                  > such that *8n + 5 <= cn* for every integer *n* >= n0.
+               c = 9 and n0 = 5
+     
+      • This is another way of saying that *f(n)* is less than or equal to a function *g(n)* up to a constant factor asymptotically.
+      • Big O notation allows us to ignore constant factors and lower order terms to focus on the main components of a function that affect its growth.
+      
+      • We can characterize the growth rate of any *polynomial function* of degree *d*:
+         ▸ f(n) = a0 + a1(n) + a2(n^2) ... + ad(n^d)
+         ▸ and ad > 0, then f(n) is *O(n^d)*.
+         ▸ 
+   
+   Big Omega Notation: (horseshoe symbol)
+      • _BEST CASE TIME_
+      • Show that an algorithm takes *at least* a certain amount of time.
+         ▸ As opposed to O(n) notation that shows *at most* amount of time.
+
+      General Rules for Time Complexity Analysis:
+         • Interested in massive input size.
+         • Worst case scenario in case of conditional statements (look at *else* statements).
+            T(n) = n^3 + 3n^2 + 4n + 2
+               1) drop lower order terms
+               2) drop constant multiplier
+               = n^3  (n → infinity) 
+               will not grow any faster than:
+               cn^3 == O(n^3)
+                     
+         • Running Time: 
+            1) int a;
+            2) a = 5;
+            3) a ++;   “3 simple statements” _O(1)_
+h           4) for (i = 0; i < n; i++){ simple statements }; _O(n)_
+            T(n) = O(1) + O(n) “take highest order and then ignore the rest”
+            T(n) = O(n)
+
+
+Recursion:
+   • When a method calls itself.
+
+   Example; 
+      Factorial(n) = n * (n-1) * (n-2) * (n-3) ... * 2 * 1
+      Base case → Factorial(1) = 1
+      Recursive step → Factorial(n) = n * Factorial(n-1)
+
+         {{{java public static long factorial(int n){
+            if (n == 1) return 1;
+            return n * factorial(n-1);
+         }
+      }}}
+      • You need a *base case* for all recursive methods because otherwise it would keep calling itself forever.
+         ▸ In the example above, the method will stop calling itself once it gets 1 as a value because you can’t take the factorial of anything below 1.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+

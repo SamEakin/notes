@@ -1,0 +1,642 @@
+discrete
+
+#Chapter 1: Logic
+
+Propositions:
+   • *Logic*: The study of formal reasoning. 
+   • *Proposition*: A statement that is either T or F.
+       *Compound Proposition*: Connecting individual propositions with logical operations.
+Logical Operations: 
+   *Conjunction*: (^  = AND)
+        P: 2 is even.
+        Q: 3 is odd.
+        P ^ Q = 2 is even and 3 is odd.
+        P ^ Q = TRUE.
+        
+        Truth Table
+        P  Q  P^Q
+        T  T  T   P^Q is true when both P and Q are true
+        T  F  F
+        F  T  F   false when either P or Q are false
+        F  F  F
+   *Disjunction*: (v = OR)
+        P: 2 is even.
+        Q: 3 is odd.
+        P v Q = 2 is even or 3 is odd.
+        P v Q = TRUE.
+
+        Truth Table
+        P  Q  PvQ
+        T  T  T
+        T  F  T   PvQ is true when either P or Q is true.
+        F  T  F
+        F  F  F 
+      P  -P
+      T  F
+      F  T
+Order of Operations: 
+   1) - (not)
+   2) ^ (and)
+   3) v (or)
+
+      P: true 
+      Q: false
+      R: true
+         
+      P ^ -(Q v R)
+      T ^ -(F v T)
+      T ^ -T
+      T ^ F
+      _F_
+
+Filling in rows of a truth table:
+   If there are n variables, there are 2^n rows. 
+Conditional Operation: (→ = THEN):
+   P -> Q is read as “if P then Q.”
+   P: hypothesis
+   Q: conclusion
+
+   P only if Q == if P then Q
+   _P → Q == ~P v Q_
+
+   Truth Table
+   P  Q  P→Q
+   T  T  T
+   T  F  F   “false if P is true and Q is false, otherwise always true.”
+   F  T  T
+   F  F  T
+
+Biconditional Operation: (<-> = IF AND ONLY IF)
+   → if 1 is true then the other is true.
+   → if 1 is false then the other is false.
+
+   _P <-> Q = (P→Q) ^ (Q→P)_
+
+Logical Equivalence:
+   • A compound proposition is a *Tautology* if the proposition is always true.
+   • A compound proposition is a *Contradiction* if the proposition is always false.
+
+      Truth table for Tautology
+         P  ~P  (P v ~P)
+         T   F   T
+         F   T   T
+
+      Truth table for Contradiction
+         P  ~P  (P ^ ~P)
+         T   F   F
+         F   T   F
+   • Two propositions are said to be *logically equivalent* if they have the same truth values of their individual propositions.
+      P == R “P is logically equivalent to R.” 
+         → this is true only if P <—> R is a *tautology*.
+         
+         Show that P → ~P == ~P :
+            P  ~P  (P → ~P)
+            T   F   F
+            F   T   T    ~P and (P → ~P) both have the same truth values so they are logically equivalent.
+
+De Morgan’s Laws:
+   How to distribute a negation(~) inside a parenthesized expression.
+
+      1) ~ (P v Q) == (~P ^ ~Q)
+      2) ~ (P ^ Q) == (~P v ~Q)
+      
+Laws of Propositional Logic:
+   If two propositions are logically equivalent, then one can be substituted for the other within a more complex proposition.
+
+      For example;
+        P → Q == ~P v Q    therefore;
+        (P v R) ^ (~P v Q) == (P v R) ^ (P → Q)
+
+   Laws:
+      •Idempotent Law:
+         P v P == P
+         P ^ P == P
+
+      • Associative Law:
+         (P v Q) v R == P v (Q v R)
+         (P ^ Q) ^ R == P ^ (Q ^ R)
+         
+      • Commutative Law:
+         P v Q == Q v P
+         P ^ Q == Q ^ P
+
+      • Distributive Law:
+         P v (Q ^ R) == (P v Q) ^ (P v R)
+         P ^ (Q v R) == (P ^ Q) v (P ^ R)
+
+      • Identity Law:
+         P v F == P
+         P ^ T == P
+
+      • Domination Law:
+         P ^ F == F
+         P v T == T
+
+      • Double Negation Law:
+         P == ~ ~P
+
+      • Complement Law:
+         P ^ ~P == F
+         ~T == F
+         P v ~P == T
+         ~F == T
+
+      • De Morgan’s Law:
+         ~ (P v Q) == ~P ^ ~Q 
+         ~ (P ^ Q) == ~P v ~Q 
+
+      • Absorption Law:
+          P v (P ^ Q) == P
+          P ^ (P v Q) == P
+
+      • Conditional Identities:
+         P → Q == ~P v Q
+         P <-> Q == (P → Q) ^ (Q → P)
+
+Predicates and Quantifiers:
+   • A  *Predicate* is a logical statement whose truth value is a function of one or more variables.
+
+      x is an odd number.
+         > This is not a proposition because truth value depends on value of x.
+         > Truth value of statement can be expressed as a function.
+      P(5) = 5 is an odd number = true
+
+     • A *Domain* of a variable in a predicate is set of all possible values for that variable.
+
+Universal Quantifier:
+   Vx P(x)
+      > P(x) is true for all possible x values in its domain.
+      > If true, then it is a *universally quantified statement*.
+   x = {a,b,c}
+   Vx P(x) == P(a) ^ P(b) ^ P(c)
+
+   For example; 
+      Prove [ Vx (1/(x+1)) < 1 ] is true for any positive real number x.
+
+      0 < x  “true for all positive integers x.”
+      0+1 < x+1  “add 1 to both sides.”
+      1 < x + 1
+      1/(x+1) < (x+1)/ (x+1)  “divide both sides by (x+1).”
+      Vx[1/(x+1) < 1] “true for all positive integers x.”
+
+   •*Counterexample*: an element in the domain of Vx P(x) that is false.
+
+Existential Quantifier: 
+   Ex P(x) “There exists an x, such that P(x).”
+      > Asserts that P(x) is true for at least 1 possible value for x in its domain.
+      
+   x = {a,b,c}
+   Ex P(x) == P(a) v P(b) v P(c)
+ 
+Quantified Statements:
+   Ex ( P(x) ^ Q(x) )  “There is an x for P and Q to be true.”
+   • Counterexample to prove Vx.
+   • Example to prove Ex.
+   De Morgan’s Law for Quantified Statements:
+      1) -Vx F(x) == Ex -F(x)
+      2) -Ex P(x) == Vx -P(x)
+
+      Example;
+         ~ Ex (P(x) → ~ Q(x))
+         Vx ~ (P(x) → ~ Q(x)) “De Morgan’s law”
+         Vx ~ (~ P(x) → ~ Q(x)) “Conditional property”
+         Vx (~~ P(x) ^ ~~ Q(x)) “De Morgan’s law”
+         Vx (P(x) ^ Q(x)) “Double negation law”
+
+Nested Quantifiers:
+   • If a predicate has more than one variable, each variable must be bound by a separate quantifier.
+
+   VxEy P(x,y) “x and y are both bound.”
+   Vx P(x,y) “x is bound, y is free.”
+
+   De Morgan’s Law for Quantified Statements:
+         1) ~ Vx Vy P(x,y) == Ex Ey ~ P(x,y)
+         2) ~ Vx Ey P(x,y) == Ex Vy ~ P(x,y)
+         3) ~ Ex Vy P(x,y) == Vx Ey ~ P(x,y)
+         4) ~ Ex Ey P(x,y) == Vx Vy ~ P(x,y)
+
+         @TODO: 1.10 Nested Quantified Statements review more..
+Logical Reasoning:
+   • *Argument*: A series of propositions (called *hypotheses*)
+   • Followed by a final proposition, called the *Conclusion*.
+   • Argument is valid IF the conclusion is true whenever all hypotheses are true.
+
+      p1
+      p2
+      p3
+      _
+      :. C   “therefore C”
+
+      >Valid when this is a tautology: 
+         (p1 ^ p2 ^ p3) → C
+
+Rules of Interference with Propositions:
+   • Modus ponens
+      P
+      P → Q
+      _
+      Q
+
+   • Modus tollens
+      ~Q 
+      P → Q
+      _
+      ~P
+
+   • Addition
+      P
+      _
+      P v Q
+
+   • Simplification
+      P ^ Q
+      _
+      P
+
+   • Conjunction
+      P
+      Q
+      _
+      P ^ Q
+
+   • Hypothetical syllogism
+      P → Q
+      Q → R
+      _
+      P → R
+ integers(*Z*).
+ *Floor*: round down.
+ *Ceiling*: round up.
+
+   • Disjunctive syllogism
+      P v Q
+      ~P
+      _
+      Q
+
+   • Resolution
+      P v Q
+      ~P v R
+      _
+      Q v R
+
+
+         Example;
+            (P v R) → Q
+            Q → T
+            R
+            _ _ _ _ 
+            T
+               1) r “hypothesis”
+               2) P v R “Addition, 1”
+               3) (P v R) → Q “hypothesis”
+               4) Q “Modus ponens, 2,3”
+
+Rules of Interference for Quantified Statements:
+   • Universal Instantiation: 
+      c is an element (arbitrary or particular)
+      Vx P(x)
+      _
+      P(c)
+
+   • Universal Generalization:
+      c is an arbitrary element
+      P(c)
+      _
+      Vx P(x)
+
+   • Existential Instantiation: 
+      Ex P(x)
+      _
+      (c is a particular element) ^ P(c)
+      
+   • Existential Generalization:
+      c is an element (arbitrary or particular)
+      P(c)
+      _
+      Ex P(x)
+
+#Chapter 2: Proofs
+   • A *Theorem* is a statement that can be proven to be true. 
+   • A *Proof* consists of several steps which has a final step showing a theorem to be true.
+   • The proof of a theorem may use *Axioms*(statements already proven to be true).
+
+   Example;
+      Theorem : Every positive integer is less than or equal to its square.
+      Proof : 
+         1) Let x be an integer x > 0
+         2) Since x is an integer and x > 0: 
+               x >= 1
+         3) Since x > 0, we can multiply both sides by x:
+               x(x) >= 1(x)
+         4) Simplify: 
+               x^2 >= x  TRUE
+
+Proofs by Exhaustion: 
+   • If the domain of a universal statement is small, it is easiest to prove the statement by checking each element individually.
+      ◦ For example: If n E {-1,0,1}, then n^2 = |n|
+      ◦ Proof:
+         ▸ n = -1: (-1)^2 = 1 = |-1| “true”
+         ▸ n = 0: (0)^2 = 0 = |0| “true”
+         ▸ n = 1: (1)^2 = 1 = |1| “true”
+            ▹ Statement is true
+Counterexamples:
+   • If the domain is really big then you can disprove a theorem by finding one case where it is *false*.
+
+Direct Proofs:
+   • _Assume: HYPOTHESIS_
+   • _Derive: CONCLUSION_
+   • Many theorems take the form of a conditional statement in which a conclusion follows from a set of hypotheses.
+      ◦ Theorems of this kind take the form *p → c*
+         ▸ *p* is a proposition that is a conjunction of all the hypotheses.
+         ▸ *c* is the conclusion.
+   • In a direct proof of a conditional statement, the hypothesis *p* is assumed *true* and the conclusion *c* is proven as a result of the assumption.
+   • For Example:
+      ◦ For every integer n, if n is odd, then n^2 is odd.
+      ◦ Let D(n) mean n is odd.
+      ◦ Vn (D(n) → D(n^2))
+
+   A *RATIONAL NUMBER* is a number that can be expressed as the ratio of two integers.
+
+   • For Example: 
+      ◦ If R and S are rational numbers, Then R + S is also rational.
+      ◦ R = a/b
+      ◦ S = c/d
+      ◦ R + S = (ad + cb) / bd
+      ◦ Since b != 0 and d != 0, then bd != 0
+         ▸ R + S must be a ratio of integers.. So it’s rational.
+
+   • For Example:
+      ◦ If: x & y are real and x > 0 & y > 0
+      ◦ Then: (x/y) + (y/x) >= 2
+      ◦ xy[ (x/y) + (y/x) ] >= xy[ 2 ]
+      ◦ x^2 + y^2 >= 2xy
+      ◦ x^2 -2xy + y^2
+      ◦ (x - y)^2 >= 0
+         ▸ since x & y are R+ then this is always true.
+
+Proof by Contrapositive:
+   • _Assume: ~CONCLUSION
+   • _Show: ~HYPOTHESIS_
+   • Proves a conditional theorem of the form *p → c* by showing that the contrapositive ~c → ~p is *true*.
+      ◦ For Example:
+      ◦ For every integer n, if n^2 is odd; then n is odd.
+      ◦ Vn ( D(n^2) → D(n) )
+      ◦ Proving by contrapositive: assume that D(n) is false and therefore D(n^2) is also false.
+      ◦ 2n: even
+      ◦ 2n^2 = 2(n * n): even * even = even
+
+Deciding to Prove directly or by contrapositive:
+   • Does the hypothesis or the negation of the conclusion provide a more useful assumption to work with?
+   • For Example:
+      ◦ For every x is a positive int, If x^2 is even.
+      ◦ Then x is even.
+      ◦ By contrapositive:
+      ◦ 2k + 1 odd
+      ◦ (2k + 1)^2
+      ◦ 4k^2 + 4k + 1
+      ◦ 2(2k^2 + 2k) + 1   “(2k^2 + 2k) is an integer k’”
+      ◦ 2k’ + 1   “odd”
+
+Proof by Contradiction:
+   • _Assume: ~THEOREM_
+   • _Show: INCONSISTENCY_
+   • Start by assuming that the entire theorem is *false* and then shows that some logical inconsistency arises as a result.
+      ◦ If T is the theorem statement, the proof begins with the assumption ~T.
+      ◦ This leads to a conclusion R ^ ~R , for some proposition R.
+   • If P → Q
+      ◦ Then the assumption is P ^ ~Q  “which is logically equivalent to ~(P→Q)
+   • Unlike direct and contrapositive proofs; these can be used to prove theorems that are not in conditional statements.
+   • Sometimes called an *INDIRECT PROOF*.
+
+Summary of Proof Types:
+   • Assume theorem is given in the form *P → Q*
+      1) *Direct Proof:* Assume *P*. 
+         ▸ Follow a series of steps to conclude *Q*.
+      2) *Contrapositive:* Assume ~ *Q*. 
+         ▸ Follow a series of steps to conclude ~ *P*.
+      3) *Contradiction:* Assume *P ^ ~Q*. 
+         ▸ Follow a series of steps to conclude *R ^ ~R*.
+
+Proof by Cases:
+   • Many theorems can be expressed as Vx P(x). Where P is a predicate with variable x whose value can be an element from some domain.
+   • Someteimes proving for all the elements in a set simultaneously is difficult. Instead, we can split it up.
+   • *Proof by cases* splits up Vx p(x) into separate classes and gives a separate proof for each.
+   • For Example:
+      ◦ For every integer x ; x^2 - x is an even integer.
+      ◦ Case 1: x is even
+         ▸ x = 2k for some integer k
+         ▸ x^2 - x = (2k)^2 - 2k
+         ▸ 4k^2 - 2k == 2(2k^2 - k)
+         ▸ 2(k’) “even”
+      ◦ Case 2: x is odd
+         ▸ x = 2k + 1 for some integer k
+         ▸ (2k + 1)^2 - (2k + 1)
+         ▸ 4k^2 + 4k - 2k
+         ▸ 4k^2 + 2k
+         ▸ 2(2k^2 + k) “even”
+   
+#Chapter 3: Sets
+   • A *set* is a collection of objects.
+   • Objects in a set are called *elements*.
+   • The symbol ∈ (E for these notes) indicates what is in a set.
+      ◦ 2 E A “2 is an element in set A.”
+   • *Cardinality* is the size of a set. Denoted as *|A|*.
+
+Common Set Notation:
+   • *N*: The set of natural numbers. “0, 1, 2, ...”
+   • *Z*: The set of all integers. “... -2, -1, 0, 1, ...”
+   • *Q*: The set of all rational numbers. “0, 1/2, etc”
+   • *R*: The set of all real numbers. “0, 1/2, 5.23, pi, sqrt(2), ...”
+
+   • _0 is neither positive or negative!_
+
+Set Notation: 
+   • Defining a set by specifying that it includes all elements in a larger set that also satisfy the given conditions.
+      ◦ Looks like this: *A = {x E S: P(x)}*
+         ▸ *S* is the larger set from which the elements in A are taken.
+         ▸ *P(x)* is some condition for membership in set *A*.
+         ▸ the *:* symbol is read as “such that”.
+
+Universal Set:
+   • Denoted as *U*, is the set that contains all elements in a particular context.
+
+Subsets:
+   • If every element in *A* is also an element of *B*:
+      ◦ Then *A* is a subset of *B*. 
+      ◦ Denoted as: *A ⊆ B*  “A c B for these notes.”
+   • *A = B* only if (A c= B) & (B c= A)
+   • For Example:
+      ◦ A = {1,2,3}
+      ◦ B = {1,2,3,4}
+         ▸ A c= B
+         ▸ B !c= A “because B doesn’t contain the same elements as A.”
+   • If A c= B *but* B has an element that is not in A, then A is a *PROPER SUBSET* of B.
+      ◦ from above example: A is a proper subset of B
+
+Sets of Sets:
+   • The elements of a set can be sets themselves.
+      ◦ A = {{1,2}, {4}, {1,2,3}}
+         ▸ {1,2} E A
+         ▸ 1 !E A
+
+Power Sets: 
+   • Denoted *P(A)*:
+      ◦ Is the subset of all subsets of *A*.
+         ▸ A = {1,2,3}
+         ▸ P(A) = {{null},{1},{2},{3},{1,2},{1,3},{2,3},{1,2,3}}
+   _THEOREM_
+   Cardinality of a Power Set:
+      • Let A be a finite set of cardinality n.
+      • The cardinality of the power set of A is 2^n. → or |P(A)| = 2^n
+Set Operations:
+   Intersection Operation on Sets:
+      • A ^ B is all elements that are in both set A and set B.
+         ◦ A = {1,2,3} B = {2,3,4}
+         ◦ A ^ B = {2,3}
+      • Can also apply to infinite sets.
+         ◦ A = { x E Z: x is an integer of multiple 2.
+         ◦ B = { x E Z: x is an integer of multiple 3.
+         ◦ A ^ B = { x E Z: x is an integer of multiple 6.
+            ▸ A ^ B is the set of all integers that are a multiple of both 2 and 3.
+   Union of Sets:
+      • A u B is the set of all elements that are in either A or B.
+         ◦ A = {1,2} B = {3}
+         ◦ A u B = {1,2,3}
+   Set Difference:
+      • *A - B* is the difference between A and B. 
+      • The Set of elements that are in A but not B.
+         ▸ A = {1,2,3} B = {2,3,4}
+         ▸ A - B = {1}
+      • *A - B != B - A* “not commutative”
+      Symmetric Difference:
+         • A ⊕ B is the set of elements that are in either A or B *BUT NOT BOTH!*
+         • A ⊕ B = (A - B) u (B - A)
+   Set Complement:
+      • ‘A is the complement of A
+      • The set of all elements that are in U but not in A.
+Set Identities:
+   1) x ∈ A ∩ B   ↔   (x ∈ A) ∧ (x ∈ B)
+   2) x ∈ A ∪ B   ↔   (x ∈ A) ∨ (x ∈ B)
+   3) x ∈ A’   ↔      ¬(x ∈ A)
+
+   4) x ∈ ∅   ↔   F
+   5) x ∈ U   ↔   T
+
+   • A *set identity* is an equation involving sets that is true regardless of the contents of the sets in the expression.
+Cartesian Products:
+   • An *ordered pair* of items is written (x,y).
+   • The order matters! Indicated by ()
+      ◦ (x,y) != (y,x) “unless x = y”
+      ◦ {x,y} == {y,x}
+   • For two sets A and B:
+      ◦ The cartesian product is *A x B*
+         ▸ A x B is the set of all ordered pairs in which the first entry is in A and the second entry is in B.
+
+    A x B = { (a, b) : a ∈ A and b ∈ B }
+
+   • For Example:
+      ◦ A = {1,2} B = {a,b}
+      ◦ A x B = {(1,a),(1,b),(2,a),(2,b)}
+Partitions:
+   • *A* and *B* are *disjoint* if their intersection is empty.
+      ◦ A ^ B = NULL
+   • A sequence of sets is *pairwise disjoint* if every pair of distinct sets in the sequence is disjoint.
+      ◦ Ai ^ Aj = NULL for any i and j in range 1 → n where i != j
+   • For Example:
+      ◦ A = {1,2,3,4,5,6}
+      ◦ A1 = {1,2,3}
+      ◦ A2 = {4}
+      ◦ A3 = {5,6}
+         ▸ A1 A2 A3 are partitions of A.
+
+#Chapter 4: Functions
+
+   • A *function* maps elements from one set A to another set B.
+   • f:A → B “f is a function from A to B.”
+      ◦ A is the *domain* of f.
+      ◦ B is the *target* of f.
+   • Also denoted as *f(x) = y*.
+   • For function *f:X → Y*
+      ◦ an element *y* is in the *RANGE* of *f* if and only if there is an *(x E X)* such that *(x,y) E f*.
+      ◦ Range of f = { y: (x, y) ∈ f, for some x ∈ X }
+   • The *range* of a function is a subset of the target but isn’t necessarily == to the target.
+      ◦ In an *Arrow Diagram*, the range is the set of elements with arrows pointing to them.
+Floor and Ceiling functions:
+   • Mapping real numbers (*R*) into integers(*Z*).
+   • *Floor*: round down.
+   • *Ceiling*: round up.
+   •
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#Chapter 5: Relations / Digraphs
+#Chapter 7: Sequences
+   • A *sequence* is a special type of function in which the domain is a consecutive set of integers.
+      ◦ For example:
+      ◦ G(x) is a function for the GPA of a student throughout 4 years.
+      ◦ The domain is {1,2,3,4} “sequential → sequence”
+      ◦ {G(1) = 4.0 ,G(2) = 3.5, G(3) = 2.0, G(4) = 3.0}
+      ◦ *Indexes:* 1,2,3,4 
+         ▸ 1 is *initial index*.
+         ▸ 4 is *final index*.
+      ◦ *Terms:* 4.0, 3.5, 2.0, 3.0
+Geometric sequence: 
+   • A sequence of real numbers where each term after the original is found by multiplying by the *common ratio*.
+      ◦ For example: 
+         ▸ Initial term = 4, Common ratio = 1/2
+         ▸ {4,2,1,1/2}
+   • Given initial term and ratio: find term x.
+      ◦ S(x) = S(0)(ratio^x)
+Arithmetic Sequence:
+   • A sequence of real numbers where each term after the first has a *common difference*.
+      ◦ For example:
+      ◦ S(0) = 1, common diff = 2
+      ◦ {1,3,5,7,9}
+      ◦
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
