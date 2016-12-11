@@ -1,1 +1,0 @@
-/Users/seakin/.vim/bundle/vim-notes/misc/notes/user/discrete
