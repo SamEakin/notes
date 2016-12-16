@@ -1,5 +1,32 @@
 discrete
+#MarkDown Syntax
+• :digraphs — displays special character codes in vim
+   ◦ to enter a character:
+      1. insert mode
+      2. <ctrl> K 
+      3. <digraph keys>
 
+   _COMMONLY USED EXAMPLES_
+    X² → [number] S
+    X₂ → [number] s
+    ∪  → U )
+    ∩  → ( U
+    ∈  → ( -
+    ∑  → + Z 
+    Δ  → D *
+    ≤  → = < 
+    ≥  → > =
+    ω  → w *
+    ∆  → D E
+    ф  → f =
+
+http://www.alecjacobson.com/weblog/?p=443
+
+
+   _more codes_
+   http://www.alecjacobson.com/weblog/?p=443
+
+      
 #Chapter 1: Logic
 
 Propositions:
@@ -566,30 +593,27 @@ Floor and Ceiling functions:
    • Mapping real numbers (*R*) into integers(*Z*).
    • *Floor*: round down.
    • *Ceiling*: round up.
-   •
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Chapter 5: Relations / Digraphs
+   • Reflexive - xRx 
+   • Symmetric - xRy → yRx
+   • Transitive - xRy ^ yRz → xRz
+   • 
+#Chapter 6: Computation 
+@TODO take notes for this chapter
+Growth Rate of Functions:
+   _Fastest → Slowest_ (fastest at top)
+      log₂N
+      N
+      N log₂N
+      N²
+      N³
+      2^N
+
+
+
+
+
+
 #Chapter 7: Sequences
    • A *sequence* is a special type of function in which the domain is a consecutive set of integers.
       ◦ For example:
@@ -614,29 +638,298 @@ Arithmetic Sequence:
       ◦ {1,3,5,7,9}
       ◦
 
+#Chapter 8-9: Counting
+
+• N = number of items
+• K = kinds of said items
+
+QUICKNOTES:
+
+Let A = {1,2,3,4,5,6}
+• Pick 3
+• How Many:
+   1) Ordered sequences: _Permutations_
+      ◦ Without repitition?
+         ▸ P(6,3) = 6 * 5 * 4 ==  6! / 3!
+      ◦ With repitition?
+         ▸ 6 * 6 * 6 == 6³
+   2) Unordered: _Combinations_
+      ◦ Without repitition?
+         ▸ 6! / 3!(6-3)!
+      ◦ With repitition? “n choose r”
+         ▸ (6-3+1)! / 3!
+
+Sequences:
+   ◦ “permutation with repitition”
+   ◦ Ordered
+   ◦ Repeating
+   ◦ take N, stack them
+
+• K ^ N
+
+Arrangements:
+   ◦ “permutation without replacement”
+   ◦ Ordered
+   ◦ Non-Repeating
+   ◦ K individual items, take N, stack them.
+
+• [ ( N! ) / ( N-K )! ]
+
+Subsets:
+   ◦ “N choose K”
+   ◦ Non-Ordered
+   ◦ Non-Repeating
+   ◦ K individual items, put N into a bag
+
+• ( N )   ==   [ (N!) / (K!(N-K)! ]
+  ( K )
+
+Multi-Subsets:
+   ◦ Non-Ordered
+   ◦ Repeating
+   ◦ K stacks of items, put N of them into a bag.
+
+• ( N + K - 1 )
+  (     K     )
+
+#Chapter 10: Discrete Probability
+@TODO take notes for this chapter
+#Chapter 11: Graphs
+
+Parallel Edges: - multiple edges between the same pair of vertices. 
+
+Self-Loop: - an edge between a vertex and itself.
+
+Simple Graph:  does not have any parallel edges or self-loops.
+
+Regular Graph:  all vertices have the same degree.
+
+D-Regular Graph: - all vertices have degree = D.
+
+Komplete Graph:  *K*n has an edge between every pair of n vertices. Called a _Clique_ of size n. Or an n-clique.
+   ◦ for K₄ → m = (⁴₂)
+
+Isomorphic Graph:  graphs with the same properties as one-another. 
+
+Bi-Partite Graph: a graph where you can split the vertices down the middle and each edge will connect from one side to the other.
+
+Complete BiPartite: Graph - *K*x,y a bi-partite graph where *x* vertices on the left are each connected to all *y* vertices on the right & vice-versa
+
+Planar Graph:  can be drawn in the plane without any edge crossings.
+   ◦ Determining if a graph is planar...
+   ◦ “Euler’s Identity”:
+      ▸ n - m + r = 2
+         ▹ n = nodes
+         ▹ m = edges
+         ▹ r = regions
+   ◦ Finding number of edges in a planar graph...i
+      ▸ m ≤ 3n - 6 
+         ▹ this will prove if a K graph is planar or not!
+
+Incremental Construction of graph G:
+   1. only an edge is added. → m++
+   2. an edge and vertex are added. → n++ m++ 
+      ◦ therefore, if G has n nodes, Gs → (n-1) step 2’s.
+   • *Proof*:
+      ◦ r = 1+(m−(n−1)) = 2+m−n
+
+Regions: 
+   • Degree of a region = ∑m around the region
+      ▸ Trace the edges. Internal edges are counted twice (you trace each side)
+
+Coloring:
+   • Used to represent constraints on a graph.
+
+   • Chromatic Number X(G): minimum # of colors needed.
+      ◦ “Lower Bound of X(G)”
+      ◦ maximum clique = ω (G) 
+      ◦ if G is undirected
+         ▸ ω (G) ≤ X(G)
+      ◦ “Upper Bound of X(G)”
+      ◦ maximum degree of any vertex in G = ∆(G)
+         ▸ X(G) ≤ ∆(G) + 1
+
+       ω (G) ≤ X(G) ≤ ∆(G) + 1
+
+
+   • “Greedy Coloring Algorithm”
+      1) Number set of possible colors. (more than you’ll probably need)
+      2) Order vertices in any arbitrary order. 
+      3) for each *v*
+         ▸ assign a color different than it’s neighbors.
+         ▸ for each selection use the lowest color# possible.
+
+#Chapter 12: Trees
+
+   • An undirected graph that is connected and has no cycles.
+
+   • *P*n is a graph
+
+#Chapter 13: Integer Properties
+
+Division Theorem:
+   ◦ For any two numbers A and D:
+      ◦ _A = DQ + R_
+         ▸ Q = quotient
+         ▸ R = remainder
+
+   ◦ Therefore if:
+      ◦ A = DQ
+   ◦ Then:
+      ◦ D | A
+
+Greatest Common Divisor:
+• The largest number that divides both X and Y.
+
+• GCD(X,Y)
+
+• “Bezout’s Identity”
+   ◦ If:
+      GCD(A,B) = G
+   ◦ Then:
+      AX + BY = G
+
+• To find A and B coefficients use “Euclid’s Algorithm”.
+
+Euclid’s Algorithm:
+• For A, B, and X: 
+   ◦ GCD(A, B) = GCD(B, A-BX)
+      ◦ recurse until B == 0
+
+
+• Modular Version:
+   ◦ GCD(A, B) = GCD(B, A % B)
+      ◦ recurse until B == 0
+   ◦ This version is good because we don’t have to pick an X coefficient!
+
+Modular Arithmetic:
+• A is congruent-mod M to B if:
+   ◦ A % M == B % M 
+
+Discrete Logarithm:
+
+_Regular Modulus:
+x mod p
+
+   ◦ 46 mod 12: “12 goes into 46 N times and has remainder R”
+   ◦ 46 mod 12 = 10: “46 mod 12 is CONGRUENT to 10” 
+
+_Discrete Modulus_
+x mod p
+
+1) find a prime *p*
+2) find *x* such that it is a primitive root of *p*   
+
+   ◦   mod 17
+   ◦ 3 mod 17
+   ◦ for 3², 3³, 3⁴, 3⁵, ...
+   ◦ 3^x mod 17 == equally likely to be any number between 1 and *p-1*
+      ◦ 3¹ mod 17 = 3 mod 17   = 2
+      ◦ 3² mod 17 = 9 mod 17   = 8
+      ◦ 3³ mod 17 = 27 mod 17  = 17
+      ◦ 3⁴ mod 17 = 81 mod 17  = 13
+      ◦ 3⁵ mod 17 = 243 mod 17 = 5
+      ◦ 3⁶ mod 17 = 729 mod 17 = 15
+      ◦ 3⁷ mod 17 = 2187 mod 17 = 11
+
+• Given X, 
+   ◦ This is easy to solve for N from: 3^X mod 17 = N
+• Given N,
+   ◦ REALLY hard to solve for X from:  N = 3^x mod 17  
 
 
 
 
 
 
+Converting from Decimal to Binary:
+1) Convert a number into a sum of powers of 2.
 
+   _Powers of 2_
+   2⁰ = 1
+   2¹ = 2
+   2² = 4
+   2³ = 8
+   2⁴ = 16
+   2⁵ = 32
+   2⁶ = 64
+   2⁷ = 128
+   2⁸ = 256
+   2⁹ = 512
 
+2) Starting with the lowest power( 2⁰ = 1 )
+   ◦ If sum contains it: 1
+   ◦ If not: 0
 
+-Example-
+   7
+   7=4+2+1
+   _ _ _ _
+   8 4 2 1
 
+ = 0 1 1 1
 
+Exponentiation by Squaring:
+• Allows for fast exponentiation of huuuge numbers.
 
+   _STEPS_
+   1) product = 1
 
+   2) for each bit in binary number:
+      ◦ if 1 → product = product² * base  
+      ◦ if 0 → product = product²
 
+• Example:
 
+   7^9
 
+   9 in base 2’s: 8+0+0+1
+   9 in binary:   1 0 0 1
+   Base = 7
+   P = 1
 
+   1: 1² * 7    = 7
+   0: 7²        = 49
+   0: 49²       = 2401
+   1: 2401² * 7 = 40353607
 
+• Another Example:
 
+   7^103 mod 53
 
+   ◦ Same steps except mod 53 for each calculation.
 
+RSA: 
+• Cryptography
+   ◦ Public Key
+   ◦ Private Key
 
+_Steps_
+   1) Pick two large prime numbers P and Q.
 
+   2) Let N = PQ
 
+   3) Compute “Euler’s Totient” ф(N)
+      ◦ ф(N) = (P-1)(Q-1)
 
+   4) Find D such that GCD(D,ф(N)) == 1
 
+   5) “Extended Euclidean Algorithm”
+      ◦ Find E such that:
+      ◦ DE + ф(N)F == 1
+         ▸ D → part of private key.
+         ▸ E → part of public key.
+         ▸ throw away F.
+   
+   6) Distribute GCD(E,N) as *public key*.
+
+   7) Keep GCD(D,N) as *private key*.
+
+_Implementation_
+   1) Sending message M:
+      ◦ Convert to number C
+         ▸ C = M^E mod  N
+
+   2) Receiving number C:
+      ◦ Convert to message M:
+         ▸ M = C^D mod N

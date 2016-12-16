@@ -265,25 +265,145 @@ Recursion:
       • You need a *base case* for all recursive methods because otherwise it would keep calling itself forever.
          ▸ In the example above, the method will stop calling itself once it gets 1 as a value because you can’t take the factorial of anything below 1.
 
+#Chapter 14: Graphs
+
+What is a graph:
+   • A set of nodes(vertices) and edges
+
+   • *Digraph* - directed edges.
+
+   • *Path* - a sequence of edges that starts at a vertex and ends at a vertex such that each edge is incident to it’s prev/next vertex’s. 
+   • *Cycle* - a path that starts & ends at the same vertex. Includes at least 1 edge.
 
 
+Formulas: 
 
+   1) graph G with m edges and vertex set V.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      sum(v in V) degree(v) = 2m
    
+
+
+#Chapter 11: Trees
+
+Tree Traversals:
+
+A B C D E F G H I
+
+_DEPTH-FIRST_ - use a *stack*.
+   • *Pre—Order* O(n)
+      ◦ 1. visit node
+      ◦ 2. left subtree
+      ◦ 3. right subtree
+   • *In-Order* 
+      ◦ 1. left subtree
+      ◦ 3. visit node
+      ◦ 2. right subtree
+   • *Post-Order* 
+      ◦ 1. left subtree
+      ◦ 2. right subtree
+      ◦ 3. visit node
+
+_BREADTH-FIRST_ - use a *queue*.
+
+   • *Level-Order* O(n)
+      ◦ node = head
+         ▸ 1. add node to queue
+         ▸ 2. add it’s children to queue
+         ▸ 3. dequeue node
+            ▹ repeat 1,2,3 with dequeued node.
+            ▹ recurse until queue is empty.
+
+Binary Search Tree:
+   • Every right-child is less than it’s parent. Every left-child is greater than it’s parent.
+
+Red-Black Tree:
+
+   • Every node is either *red* or *black*.    
+
+   h <= 2 log(n+1)
+
+      ◦ Search, insert, delete in *O(log n)*
+      ◦ Better than AVL Tree because:
+         ▸ each insertion needs *at most* 1 rotation.
+         ▸ each deletion needs at most 2 rotations.
+      ◦ Therefore, RB-Trees are better when you need to do frequent insertions & deletions.
+
+   _Properties_
+      1. The *root* node is always *black*. (*Root* *Property*)
+      2. Every *null* node is *black*. (*External* *Property*)
+      3. Every *red* node has two *black* children. (*Red Property*)
+      4. Every path from node *x* down to a leaf node has the same number of *black* nodes. (*Depth Property*)
+
+Minimum Spanning Tree: 
+
+• In a weighted graph 
+• The weight of a Spanning Tree == sum of all edge weights.
+• Of all the spanning trees, the one with the smallest weight is the minumum spanning tree.
+• Uses two algorithm’s to find:
+
+   Kruskal’s Algorithm:
+      • for graph G:
+      1) Create an empty graph T with same vertices as G but no edges.
+      2) Make priority queue with G’s edges. 
+         ▸ Prioritize lowest weight.
+      3) While number of edges in T < n-1
+         ▸ Remove edge(u,v) from Q
+         ▸ If u and v are not connected, then add (u,v) to T.
+
+   Prim’s Algorithm:
+      1) Choose an arbitrary vertex.
+      2) Grow the tree by one edge at a time.
+         ▸ Find the minimum weighted outgoing edge (Priority Queue)
+         ▸ Add that edge to tree.
+         ▸ Repeat until no outgoing edge is left.
+         
+      ◦ An edge is outgoing if it connects a node to another node not yet in the tree.
+
+Computing Shortest Path:
+• Given a weighted graph G, what is the shortest path from node u to v?
+
+   Dijkstra’s Algorithm:
+      ◦ shortest path from *one* node to every other node.
+
+      1) Pick a node *a*.
+      2) For every other node in the graph:
+         ▸ Label with ( _ , -1)   “(node reached from , edge distance)
+      3) Starting from *a*:
+         ▸ Travel to all adjacent nodes and label them with the node you’re reaching them from (a) and the edge distance.
+      4) Choose the edge with the smallest distance, for example node *b*
+         ▸ This edge is now part of the MST.
+      5) Now repeat the process for any node neighboring either *a* or *b*.
+         ▸ Keep adding the minumum edge distance to the MST
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
