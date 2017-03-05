@@ -1,0 +1,41 @@
+Object Oriented Programming
+
+#Notes Reference
+To get started enter a title for your note above. When you’re ready to save
+your note just use Vim’s :write or :update commands, a filename will be picked
+automatically based on the title.
+
+                                    * * *
+
+The notes plug-in comes with self hosting documentation. To jump to these notes
+position your cursor on the highlighted name and press ‘gf’ in normal mode:
+
+ • Note taking syntax
+ • Note taking commands
+
+
+#Class Notes
+
+##Testing
+• Black box testing - can only test inputs and outputs. No looking inside the code. Have no knowledge of how it is built. Very limited. 
+• White box testing - “path testing” looking into the code and testing all possible paths of execution.
+
+• < input
+• > output
+
+_to run: sh <  testScript
+{{{echo "test main program branch 1 -- error: missing file"
+java RoadNetwork
+
+echo "test main program branch 2 -- error: too many params"
+java RoadNetwork x y
+
+echo "test main program branch 4 -- error: can't open input file"
+java RoadNetwork asdfsdfasfas
+
+echo "test main program branch 3 -- regular case"
+java RoadNetwork Roads
+}}}
+
+_to run expanded: sh < testScript > testOutput_
+   ◦ executes inputs in testScript and puts output in file testOutput
